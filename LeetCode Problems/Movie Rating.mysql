@@ -1,0 +1,20 @@
+# Write your MySQL query statement below
+(
+    SELECT u.name AS results 
+    FROM Users AS u 
+    JOIN MovieRating AS m ON u.user_id = m.user_id
+    GROUP BY u.user_id
+    ORDER BY COUNT(*) DESC, u.name ASC
+    LIMIT 1
+)
+UNION ALL
+(
+    SELECT mm.title AS results 
+    FROM Movies AS mm 
+    JOIN MovieRating AS o ON mm.movie_id = o.movie_id
+    WHERE DATE_FORMAT(created_at, '%Y%m') = '202002'
+    GROUP BY mm.movie_id
+    ORDER BY AVG(o.rating) DESC, mm.title ASC
+    LIMIT 1
+);
+
