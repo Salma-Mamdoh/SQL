@@ -1,0 +1,35 @@
+# Write your MySQL query statement below
+WITH FirstLogin AS (
+    SELECT
+        player_id,
+        MIN(event_date) AS first_login_date
+    FROM
+        Activity
+    GROUP BY
+        player_id
+),
+
+ConsecutiveLogins AS (
+    SELECT
+        fl.player_id,
+        CASE
+            WHEN DATE_ADD(fl.first_login_date, INTERVAL 1 DAY) IN (
+                SELECT
+                    event_date
+                FROM
+                    Activity a
+                WHERE
+                    a.player_id = fl.player_id
+            ) THEN 1
+            ELSE 0
+        END AS logged_in_next_day
+    FROM
+        FirstLogin fl
+)
+
+SELECT
+    ROUND(SUM(logged_in_next_day) / COUNT(*) * 1.00, 2) AS fraction
+FROM
+    ConsecutiveLogins;
+
+
