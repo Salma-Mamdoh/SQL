@@ -1,4 +1,4 @@
-# SQL Challenges Solutions 🧨🧨
+# SQL Challenges Solutions ✨✨
 
 This repository contains my solutions to over 100 SQL challenges from LeetCode and HackerRank. I have earned SQL badges from both platforms for my achievements.
 
