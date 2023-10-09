@@ -1,6 +1,0 @@
---problem link https://datalemur.com/questions/sql-page-with-no-likes
-SELECT page_id
-FROM pages
-EXCEPT
-SELECT page_id
-FROM page_likes;
