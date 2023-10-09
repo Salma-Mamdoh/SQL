@@ -1,0 +1,11 @@
+WITH RECURSIVE PatternCTE AS (
+  SELECT 1 AS RowNumber, REPEAT('* ', 20) AS Pattern
+  UNION ALL
+  SELECT RowNumber + 1, SUBSTRING(Pattern, 1, LENGTH(Pattern) - 2)
+  FROM PatternCTE
+  WHERE RowNumber < 20
+)
+
+SELECT Pattern
+FROM PatternCTE
+ORDER BY RowNumber;
